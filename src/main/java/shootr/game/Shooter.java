@@ -5,6 +5,7 @@ import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.PixelFormat;
 import shootr.game.scene.scenes.MainMenuScene;
 import shootr.game.scene.SceneManager;
 import shootr.utils.Fonts;
@@ -47,7 +48,7 @@ public class Shooter implements Runnable {
             Display.setDisplayMode(new DisplayMode(this.width, this.height));
             Display.setFullscreen(this.fullscreen);
             Display.setTitle("shootr");
-            Display.create();
+            Display.create(new PixelFormat(8, 0, 0, 8));
         } catch(LWJGLException e) {
             Logger.fatal(this, "Failed to initialize the display.", e);
             Display.destroy();

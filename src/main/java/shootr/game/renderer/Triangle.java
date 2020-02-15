@@ -4,7 +4,7 @@ import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Triangle {
+public class Triangle implements RenderObject {
 
     public int x;
     public int y;
@@ -24,6 +24,7 @@ public class Triangle {
         this.top = new int[2];
     }
 
+    @Override
     public void draw() {
         glPushMatrix();
         glDisable(GL_BLEND);
