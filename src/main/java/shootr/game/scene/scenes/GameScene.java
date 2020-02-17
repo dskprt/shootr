@@ -4,19 +4,23 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import shootr.game.Shooter;
 import shootr.game.entity.Entity;
+import shootr.game.entity.entities.Enemy;
 import shootr.game.entity.entities.Player;
-import shootr.game.renderer.Rectangle;
+import shootr.game.renderer.objects.Rectangle;
 import shootr.game.scene.Scene;
 import shootr.game.world.World;
 
 import java.awt.*;
 import java.util.Map;
+import java.util.Random;
 
 public class GameScene extends Scene {
 
     private Rectangle mapRect;
     private Player player;
     private World world;
+
+    private Random r = new Random();
 
     public GameScene() {
         this.world = new World();
@@ -25,6 +29,11 @@ public class GameScene extends Scene {
         this.player = new Player(this.mapRect);
 
         this.world.addEntity(0, this.player);
+
+        // testing
+        for(int i = 0; i < 100; i++) {
+            this.world.addEntity(i + 1, new Enemy(r.nextInt(Display.getWidth()), r.nextInt(Display.getHeight()), 100));
+        }
     }
 
     @Override

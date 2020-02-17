@@ -1,6 +1,6 @@
 package shootr.game.entity;
 
-import shootr.game.renderer.RenderObject;
+import shootr.game.renderer.RendererObject;
 
 public abstract class Entity {
 
@@ -8,21 +8,21 @@ public abstract class Entity {
     public int y;
     public int width;
     public int height;
-    public RenderObject renderObject;
+    public RendererObject rendererObject;
 
-    public Entity(int x, int y, int width, int height, RenderObject renderObject) {
+    public Entity(int x, int y, int width, int height, RendererObject rendererObject) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.renderObject = renderObject;
+        this.rendererObject = rendererObject;
     }
 
     public abstract void update();
     public abstract void input();
 
     public void render() {
-        this.renderObject.draw();
+        this.rendererObject.draw();
     }
 
     // TODO: fix

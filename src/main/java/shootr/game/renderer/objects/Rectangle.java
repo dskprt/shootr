@@ -1,25 +1,15 @@
-package shootr.game.renderer;
+package shootr.game.renderer.objects;
+
+import shootr.game.renderer.RendererObject;
 
 import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Rectangle implements RenderObject {
-
-    public int x;
-    public int y;
-    public int width;
-    public int height;
-    public Color color;
-    public double rotation;
+public class Rectangle extends RendererObject {
 
     public Rectangle(int x, int y, int width, int height, Color color) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.color = color;
-        this.rotation = 0;
+        super(x, y, width, height, color, 0, false);
     }
 
     @Override
@@ -45,29 +35,5 @@ public class Rectangle implements RenderObject {
 
         glEnable(GL_BLEND);
         glPopMatrix();
-    }
-
-    public Rectangle position(int x, int y) {
-        this.x = x;
-        this.y = y;
-
-        return this;
-    }
-
-    public Rectangle size(int width, int height) {
-        this.width = width;
-        this.height = height;
-
-        return this;
-    }
-
-    public Rectangle rotate(double rotation) {
-        this.rotation = rotation;
-        return this;
-    }
-
-    public Rectangle color(Color color) {
-        this.color = color;
-        return this;
     }
 }

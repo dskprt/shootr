@@ -3,8 +3,8 @@ package shootr.game.entity.entities;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import shootr.game.entity.Entity;
-import shootr.game.renderer.Rectangle;
-import shootr.game.renderer.Triangle;
+import shootr.game.renderer.objects.Rectangle;
+import shootr.game.renderer.objects.Triangle;
 
 import java.awt.*;
 
@@ -21,7 +21,7 @@ public class Player extends Entity {
                 new Triangle((Display.getWidth() - 50) / 2, (Display.getHeight() - 40) / 2,
                 50, 40, Color.WHITE));
 
-        this.box = (Triangle) this.renderObject;
+        this.box = (Triangle) this.rendererObject;
         this.mapRect = mapRect;
     }
 
