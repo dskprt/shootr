@@ -1,10 +1,13 @@
 package shootr.game.entity.entities;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
 import shootr.game.entity.Entity;
 import shootr.game.renderer.objects.Rectangle;
 import shootr.game.renderer.objects.Triangle;
+import shootr.game.world.World;
 
 import java.awt.*;
 
@@ -12,17 +15,18 @@ public class Player extends Entity {
 
     private static final int SPEED = 4;
     private static final int ROTATE_SPEED = 5;
+    private static int SHOOT_DELAY = 0;
 
-    public Triangle box;
     public Rectangle mapRect;
+    public World world;
 
-    public Player(Rectangle mapRect) {
+    public Player(World world, Rectangle mapRect) {
         super((Display.getWidth() - 50) / 2, (Display.getHeight() - 40) / 2, 50, 40,
                 new Triangle((Display.getWidth() - 50) / 2, (Display.getHeight() - 40) / 2,
                 50, 40, Color.WHITE));
 
-        this.box = (Triangle) this.rendererObject;
         this.mapRect = mapRect;
+        this.world = world;
     }
 
     @Override
@@ -54,12 +58,21 @@ public class Player extends Entity {
         //    return;
         //}
 
-        if(Keyboard.isKeyDown(Keyboard.KEY_W)) box.y -= SPEED;
-        if(Keyboard.isKeyDown(Keyboard.KEY_S)) box.y += SPEED;
-        if(Keyboard.isKeyDown(Keyboard.KEY_A)) box.x -= SPEED;
-        if(Keyboard.isKeyDown(Keyboard.KEY_D)) box.x += SPEED;
+        if(Keyboard.isKeyDown(Keyboard.KEY_W)) move(0, -SPEED);
+        if(Keyboard.isKeyDown(Keyboard.KEY_S)) move(0, SPEED);
+        if(Keyboard.isKeyDown(Keyboard.KEY_A)) move(-SPEED, 0);
+        if(Keyboard.isKeyDown(Keyboard.KEY_D)) move(SPEED, 0);
 
-        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) box.rotation -= ROTATE_SPEED;
-        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) box.rotation += ROTATE_SPEED;
+        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) this.rendererObject.rotation -= ROTATE_SPEED;
+        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) this.rendererObject.rotation += ROTATE_SPEED;
+
+        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE) && SHOOT_DELAY <= 0) {
+            this.world.addEntity(new Bullet(this.x, this.y, new Vector2f(Mouse.getX(), Mouse.getY()), Bullet.Type.NORMAL));
+            SHOOT_DELAY = 1 * 60;
+        }
+
+        if(SHOOT_DELAY > 0) {
+            SHOOT_DELAY--;
+        }
     }
 }

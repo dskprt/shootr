@@ -4,15 +4,15 @@ import java.awt.*;
 
 public abstract class RendererObject {
 
-    public int x;
-    public int y;
+    public double x;
+    public double y;
     public int width;
     public int height;
     public Color color;
     public double rotation;
     public boolean outline;
 
-    public RendererObject(int x, int y, int width, int height, Color color, double rotation, boolean outline) {
+    public RendererObject(double x, double y, int width, int height, Color color, double rotation, boolean outline) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -24,7 +24,7 @@ public abstract class RendererObject {
 
     public abstract void draw();
 
-    public RendererObject position(int x, int y) {
+    public RendererObject position(double x, double y) {
         this.x = x;
         this.y = y;
 

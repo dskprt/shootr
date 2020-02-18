@@ -4,13 +4,13 @@ import shootr.game.renderer.RendererObject;
 
 public abstract class Entity {
 
-    public int x;
-    public int y;
+    public double x;
+    public double y;
     public int width;
     public int height;
     public RendererObject rendererObject;
 
-    public Entity(int x, int y, int width, int height, RendererObject rendererObject) {
+    public Entity(double x, double y, int width, int height, RendererObject rendererObject) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -47,5 +47,12 @@ public abstract class Entity {
         } else {
             return false;
         }
+    }
+
+    public void move(double addX, double addY) {
+        this.x += addX;
+        this.y += addY;
+        this.rendererObject.x += addX;
+        this.rendererObject.y += addY;
     }
 }

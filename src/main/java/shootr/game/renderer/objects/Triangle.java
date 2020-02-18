@@ -8,7 +8,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Triangle extends RendererObject {
 
-    public Triangle(int x, int y, int width, int height, Color color) {
+    public Triangle(double x, double y, int width, int height, Color color) {
         super(x, y, width, height, color, 0, false);
     }
 
@@ -17,9 +17,9 @@ public class Triangle extends RendererObject {
         glPushMatrix();
         glDisable(GL_BLEND);
 
-        glTranslatef(+(this.x + this.width / 2), +(this.y + this.height / 2), 0);
+        glTranslated(+(this.x + this.width / 2), +(this.y + this.height / 2), 0);
         glRotated(this.rotation, 0, 0, 1);
-        glTranslatef(-(this.x + this.width / 2), -(this.y + this.height / 2), 0);
+        glTranslated(-(this.x + this.width / 2), -(this.y + this.height / 2), 0);
 
         glColor4f(this.color.getRed() / 255f,
                 this.color.getGreen() / 255f,
@@ -27,9 +27,9 @@ public class Triangle extends RendererObject {
                 this.color.getAlpha() / 255f);
 
         glBegin(GL_TRIANGLES);
-        glVertex2f(this.x + (this.width / 2), this.y);
-        glVertex2f(this.x, this.y + this.height);
-        glVertex2f(this.x + this.width, this.y + this.height);
+        glVertex2d(this.x + (this.width / 2), this.y);
+        glVertex2d(this.x, this.y + this.height);
+        glVertex2d(this.x + this.width, this.y + this.height);
         glEnd();
 
         glEnable(GL_BLEND);
